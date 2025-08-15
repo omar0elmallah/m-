@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediGuard AI - Your Personal Health Companion</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --danger-color: #dc2626;
+            --warning-color: #f59e0b;
+            --success-color: #10b981;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --bg-light: #f9fafb;
+            --bg-white: #ffffff;
+            --border-radius: 12px;
+            --box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            font-size: 28px;
+            color: var(--primary-color);
+        }
+
+        .logo h1 {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .auth-buttons button {
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .login-btn {
+            background: transparent;
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+            margin-right: 10px;
+        }
+
+        .login-btn:hover {
+            background-color: rgba(37, 99, 235, 0.1);
+        }
+
+        .signup-btn {
+            background-color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+            color: white;
+        }
+
+        .signup-btn:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .hero h2 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            max-width: 700px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: var(--text-light);
+            max-width: 700px;
+            margin-bottom: 30px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .primary-btn {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 24px;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .primary-btn:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        .secondary-btn {
+            background-color: white;
+            color: var(--primary-color);
+            padding: 12px 24px;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            border: 1px solid var(--primary-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .secondary-btn:hover {
+            background-color: rgba(37, 99, 235, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .feature-card {
+            background-color: var(--bg-white);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            box-shadow: var(--box-shadow);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        .feature-icon {
+            font-size: 32px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+        }
+
+        .emergency-section {
+            background-color: var(--bg-white);
+            border-radius: var(--border-radius);
+            padding: 40px;
+            margin-bottom: 50px;
+            box-shadow: var(--box-shadow);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .emergency-section h2 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .emergency-section p {
+            color: var(--text-light);
+            max-width: 700px;
+            margin-bottom: 30px;
+        }
+
+        .emergency-btn {
+            background-color: var(--danger-color);
+            color: white;
+            padding: 12px 24px;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .emergency-btn:hover {
+            background-color: #b91c1c;
+            transform: translateY(-2px);
+        }
+
+        .health-form {
+            background-color: var(--bg-white);
+            border-radius: var(--border-radius);
+            padding: 40px;
+            margin-bottom: 50px;
+            box-shadow: var(--box-shadow);
+        }
+
+        .health-form h2 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .form-group input, .form-group select {
+            padding: 12px 15px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+        }
+
+        .symptoms-list {
+            margin-bottom: 30px;
+        }
+
+        .symptoms-list h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .symptoms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
+        }
+
+        .symptom-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .result-section {
+            background-color: var(--bg-white);
+            border-radius: var(--border-radius);
+            padding: 40px;
+            margin-bottom: 50px;
+            box-shadow: var(--box-shadow);
+            display: none;
+        }
+
+        .result-section h2 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .result-card {
+            background-color: var(--bg-light);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+
+        .result-card h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .result-card p {
+            margin-bottom: 10px;
+        }
+
+        .severity-high {
+            color: var(--danger-color);
+        }
+
+        .severity-medium {
+            color: var(--warning-color);
+        }
+
+        .severity-low {
+            color: var(--success-color);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            justify-content: center;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            color: var(--text-light);
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .footer-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: var(--bg-white);
+            border-radius: var(--border-radius);
+            width: 90%;
+            max-width: 500px;
+            padding: 30px;
+            position: relative;
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+
+        .modal h2 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--danger-color);
+        }
+
+        .modal p {
+            margin-bottom: 20px;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: flex-end;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .hero h2 {
+                font-size: 28px;
+            }
+            
+            .hero p {
+                font-size: 16px;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .primary-btn, .secondary-btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .health-form {
+                padding: 20px;
+            }
+            
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-heartbeat"></i>
+                <h1>MediGuard AI</h1>
+            </div>
+            <div class="auth-buttons">
+                <button class="login-btn">Log In</button>
+                <button class="signup-btn">Sign Up</button>
+            </div>
+        </header>
+
+        <section class="hero">
+            <h2>Your Personal AI Health Companion</h2>
+            <p>Get instant medical guidance based on your symptoms and vital signs. Our AI analyzes your condition using medical knowledge and provides appropriate recommendations.</p>
+            <div class="cta-buttons">
+                <button class="primary-btn" id="start-assessment">
+                    <i class="fas fa-plus-circle"></i> Start Health Assessment
+                </button>
+                <button class="secondary-btn">
+                    <i class="fas fa-play-circle"></i> How It Works
+                </button>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h3>AI-Powered Diagnosis</h3>
+                <p>Our advanced AI analyzes your symptoms and vital signs using medical knowledge to provide accurate assessments.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-heartbeat"></i>
+                </div>
+                <h3>Vital Signs Tracking</h3>
+                <p>Monitor your heart rate, blood pressure, oxygen levels, and other vital signs for comprehensive health insights.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-bell"></i>
+                </div>
+                <h3>Emergency Alerts</h3>
+                <p>In critical situations, we automatically alert emergency contacts or services with your location.</p>
+            </div>
+        </section>
+
+        <section class="emergency-section">
+            <h2>Emergency Assistance</h2>
+            <p>If you're experiencing severe symptoms like chest pain, difficulty breathing, or sudden weakness, activate emergency mode immediately.</p>
+            <button class="emergency-btn" id="emergency-btn">
+                <i class="fas fa-ambulance"></i> Activate Emergency Mode
+            </button>
+        </section>
+
+        <section class="health-form" id="health-form">
+            <h2>Health Assessment</h2>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="age">Age</label>
+                    <input type="number" id="age" min="0" max="120">
+                </div>
+                <div class="form-group">
+                    <label for="gender">Gender</label>
+                    <select id="gender">
+                        <option value="">Select</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="weight">Weight (kg)</label>
+                    <input type="number" id="weight" min="0">
+                </div>
+                <div class="form-group">
+                    <label for="height">Height (cm)</label>
+                    <input type="number" id="height" min="0">
+                </div>
+            </div>
+
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="heart-rate">Heart Rate (bpm)</label>
+                    <input type="number" id="heart-rate" min="0">
+                </div>
+                <div class="form-group">
+                    <label for="blood-pressure">Blood Pressure (mmHg)</label>
+                    <input type="text" id="blood-pressure" placeholder="120/80">
+                </div>
+                <div class="form-group">
+                    <label for="oxygen">Oxygen Saturation (%)</label>
+                    <input type="number" id="oxygen" min="0" max="100">
+                </div>
+                <div class="form-group">
+                    <label for="temperature">Temperature (°C)</label>
+                    <input type="number" id="temperature" step="0.1" min="20" max="45">
+                </div>
+            </div>
+
+            <div class="symptoms-list">
+                <h3>Select Your Symptoms</h3>
+                <div class="symptoms-grid" id="symptoms-grid">
+                    <!-- Symptoms will be added here by JavaScript -->
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="additional-info">Additional Information</label>
+                <textarea id="additional-info" rows="4" placeholder="Describe your symptoms in detail, when they started, and any other relevant information..."></textarea>
+            </div>
+
+            <button class="submit-btn" id="submit-assessment">
+                <i class="fas fa-stethoscope"></i> Analyze My Condition
+            </button>
+        </section>
+
+        <section class="result-section" id="result-section">
+            <h2>Assessment Results</h2>
+            <div class="result-card">
+                <h3><i class="fas fa-diagnoses"></i> Condition Assessment</h3>
+                <p id="condition-assessment">Loading assessment...</p>
+                <h3><i class="fas fa-heartbeat"></i> Severity Level</h3>
+                <p id="severity-level">Loading severity...</p>
+            </div>
+            <div class="result-card">
+                <h3><i class="fas fa-first-aid"></i> Recommended Actions</h3>
+                <div id="recommended-actions">
+                    <p>Loading recommendations...</p>
+                </div>
+            </div>
+            <div class="result-card">
+                <h3><i class="fas fa-clock"></i> When to Seek Help</h3>
+                <div id="when-to-seek-help">
+                    <p>Loading guidance...</p>
+                </div>
+            </div>
+            <div class="action-buttons">
+                <button class="secondary-btn" id="save-results">
+                    <i class="fas fa-save"></i> Save Results
+                </button>
+                <button class="primary-btn" id="find-hospital">
+                    <i class="fas fa-hospital"></i> Find Nearest Hospital
+                </button>
+            </div>
+        </section>
+
+        <footer>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">About Us</a>
+                <a href="#">Contact</a>
+            </div>
+            <p>&copy; 2023 MediGuard AI. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <!-- Emergency Modal -->
+    <div class="modal" id="emergency-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2><i class="fas fa-exclamation-triangle"></i> Emergency Mode Activated</h2>
+            <p>We've detected that you may be experiencing a medical emergency. Please stay calm while we connect you with emergency services.</p>
+            <p>Your location has been shared with emergency responders. Help is on the way.</p>
+            <div class="modal-buttons">
+                <button class="secondary-btn" id="cancel-emergency">False Alarm</button>
+                <button class="emergency-btn">
+                    <i class="fas fa-phone"></i> Call Emergency Services
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Common symptoms list
+        const symptoms = [
+            "Fever", "Headache", "Fatigue", "Cough", "Shortness of breath",
+            "Chest pain", "Dizziness", "Nausea", "Vomiting", "Diarrhea",
+            "Abdominal pain", "Muscle pain", "Joint pain", "Sore throat",
+            "Runny nose", "Sneezing", "Rash", "Swelling", "Numbness",
+            "Weakness", "Vision changes", "Confusion", "Seizures",
+            "Bleeding", "Bruising", "Palpitations", "High blood pressure",
+            "Low blood pressure", "Rapid heartbeat", "Slow heartbeat",
+            "Difficulty swallowing", "Weight loss", "Weight gain",
+            "Loss of appetite", "Excessive thirst", "Frequent urination",
+            "Constipation", "Heartburn", "Back pain", "Neck pain"
+        ];
+
+        // Initialize the symptoms checkboxes
+        function initSymptoms() {
+            const symptomsGrid = document.getElementById('symptoms-grid');
+            symptoms.forEach(symptom => {
+                const checkboxDiv = document.createElement('div');
+                checkboxDiv.className = 'symptom-checkbox';
+                
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.id = `symptom-${symptom.toLowerCase().replace(' ', '-')}`;
+                checkbox.name = 'symptoms';
+                checkbox.value = symptom;
+                
+                const label = document.createElement('label');
+                label.htmlFor = checkbox.id;
+                label.textContent = symptom;
+                
+                checkboxDiv.appendChild(checkbox);
+                checkboxDiv.appendChild(label);
+                symptomsGrid.appendChild(checkboxDiv);
+            });
+        }
+
+        // Simulate AI analysis (in a real app, this would call an API)
+        function analyzeCondition() {
+            // Get form values
+            const age = document.getElementById('age').value;
+            const gender = document.getElementById('gender').value;
+            const weight = document.getElementById('weight').value;
+            const height = document.getElementById('height').value;
+            const heartRate = document.getElementById('heart-rate').value;
+            const bloodPressure = document.getElementById('blood-pressure').value;
+            const oxygen = document.getElementById('oxygen').value;
+            const temperature = document.getElementById('temperature').value;
+            const additionalInfo = document.getElementById('additional-info').value;
+            
+            // Get selected symptoms
+            const selectedSymptoms = [];
+            document.querySelectorAll('input[name="symptoms"]:checked').forEach(checkbox => {
+                selectedSymptoms.push(checkbox.value);
+            });
+            
+            // Validate inputs
+            if (!age || !gender || selectedSymptoms.length === 0) {
+                alert('Please fill in required fields: Age, Gender, and at least one symptom');
+                return;
+            }
+            
+            // Show loading state
+            document.getElementById('health-form').style.display = 'none';
+            document.getElementById('result-section').style.display = 'block';
+            
+            // Simulate API call delay
+            setTimeout(() => {
+                // Generate mock results based on inputs
+                let condition, severity, recommendations, whenToSeekHelp;
+                
+                // Check for emergency conditions
+                if (selectedSymptoms.includes('Chest pain') || 
+                    selectedSymptoms.includes('Shortness of breath') ||
+                    (heartRate && (heartRate > 120 || heartRate < 50)) ||
+                    (oxygen && oxygen < 90)) {
+                    
+                    condition = "Possible cardiovascular or respiratory emergency";
+                    severity = "<span class='severity-high'>High: Potentially Life-Threatening</span>";
+                    recommendations = `
+                        <ul>
+                            <li><strong>Call emergency services immediately</strong></li>
+                            <li>Sit down and try to remain calm</li>
+                            <li>If prescribed, take nitroglycerin for chest pain</li>
+                            <li>Loosen any tight clothing</li>
+                            <li>Do not drive yourself to the hospital</li>
+                        </ul>
+                    `;
+                    whenToSeekHelp = "Immediate medical attention is required. Do not delay.";
+                    
+                    // Show emergency modal
+                    document.getElementById('emergency-modal').style.display = 'flex';
+                } 
+                // Check for urgent conditions
+                else if (temperature && temperature > 39 || 
+                         selectedSymptoms.includes('Confusion') ||
+                         selectedSymptoms.includes('Seizures')) {
+                    
+                    condition = "Possible infection or neurological issue";
+                    severity = "<span class='severity-high'>High: Urgent Care Needed</span>";
+                    recommendations = `
+                        <ul>
+                            <li>Seek medical attention within 2-4 hours</li>
+                            <li>Stay hydrated</li>
+                            <li>For high fever, take acetaminophen or ibuprofen if not contraindicated</li>
+                            <li>Monitor symptoms closely</li>
+                        </ul>
+                    `;
+                    whenToSeekHelp = "Seek medical attention today. If symptoms worsen, go to emergency department.";
+                }
+                // Mild conditions
+                else if (selectedSymptoms.includes('Fever') || 
+                         selectedSymptoms.includes('Cough') ||
+                         selectedSymptoms.includes('Sore throat')) {
+                    
+                    condition = "Possible viral infection (cold or flu)";
+                    severity = "<span class='severity-medium'>Medium: Monitor Closely</span>";
+                    recommendations = `
+                        <ul>
+                            <li>Rest and stay hydrated</li>
+                            <li>Take over-the-counter fever reducers if needed</li>
+                            <li>Use throat lozenges for sore throat</li>
+                            <li>Monitor temperature and symptoms</li>
+                        </ul>
+                    `;
+                    whenToSeekHelp = "If symptoms persist beyond 3 days or worsen, see a healthcare provider.";
+                }
+                // Very mild conditions
+                else {
+                    condition = "Mild symptoms, likely non-emergency";
+                    severity = "<span class='severity-low'>Low: Self-Care Recommended</span>";
+                    recommendations = `
+                        <ul>
+                            <li>Rest and monitor symptoms</li>
+                            <li>Stay hydrated</li>
+                            <li>Consider over-the-counter remedies for symptom relief</li>
+                            <li>Maintain good hygiene practices</li>
+                        </ul>
+                    `;
+                    whenToSeekHelp = "If symptoms persist beyond 1 week or new symptoms develop, consider consulting a healthcare provider.";
+                }
+                
+                // Update the result section
+                document.getElementById('condition-assessment').innerHTML = condition;
+                document.getElementById('severity-level').innerHTML = severity;
+                document.getElementById('recommended-actions').innerHTML = recommendations;
+                document.getElementById('when-to-seek-help').innerHTML = whenToSeekHelp;
+            }, 2000);
+        }
+
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', () => {
+            initSymptoms();
+            
+            // Start assessment button
+            document.getElementById('start-assessment').addEventListener('click', () => {
+                document.getElementById('health-form').scrollIntoView({ behavior: 'smooth' });
+            });
+            
+            // Submit assessment
+            document.getElementById('submit-assessment').addEventListener('click', analyzeCondition);
+            
+            // Emergency button
+            document.getElementById('emergency-btn').addEventListener('click', () => {
+                document.getElementById('emergency-modal').style.display = 'flex';
+            });
+            
+            // Close modal
+            document.querySelector('.close-modal').addEventListener('click', () => {
+                document.getElementById('emergency-modal').style.display = 'none';
+            });
+            
+            // Cancel emergency
+            document.getElementById('cancel-emergency').addEventListener('click', () => {
+                document.getElementById('emergency-modal').style.display = 'none';
+            });
+            
+            // Save results
+            document.getElementById('save-results').addEventListener('click', () => {
+                alert('Results saved to your health profile');
+            });
+            
+            // Find hospital
+            document.getElementById('find-hospital').addEventListener('click', () => {
+                alert('Opening map with nearby hospitals...');
+                // In a real app, this would use geolocation and mapping API
+            });
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', (event) => {
+            if (event.target === document.getElementById('emergency-modal')) {
+                document.getElementById('emergency-modal').style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
