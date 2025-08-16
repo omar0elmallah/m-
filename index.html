@@ -3,1823 +3,1053 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Health AI Coach - Your Personal Health Companion</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Smart Health App</title>
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap">
     <style>
-        :root {
-            --primary: #5d5bff;
-            --primary-dark: #4a48e5;
-            --secondary: #ff6b6b;
-            --dark: #2b2b43;
-            --light: #f8f9fa;
-            --success: #4caf50;
-            --warning: #ff9800;
-            --danger: #f44336;
-            --gray: #6c757d;
-            --light-gray: #e9ecef;
-        }
-
+        /* Main Site CSS */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
+            font-family: "Inter", serif;
         }
-
         body {
-            background-color: #f5f7ff;
-            color: var(--dark);
-            overflow-x: hidden;
-        }
-
-        /* Header Styles */
-        header {
-            background-color: white;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 5%;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .logo img {
-            height: 40px;
-        }
-
-        .logo h1 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--dark);
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary);
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .btn {
-            padding: 0.6rem 1.2rem;
-            border-radius: 30px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s;
-            border: none;
-            font-size: 0.9rem;
-        }
-
-        .btn-primary {
-            background-color: var(--primary);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background-color: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(93, 91, 255, 0.3);
-        }
-
-        .btn-outline {
-            background-color: transparent;
-            border: 2px solid var(--primary);
-            color: var(--primary);
-        }
-
-        .btn-outline:hover {
-            background-color: var(--primary);
-            color: white;
-        }
-
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: var(--dark);
-            cursor: pointer;
-        }
-
-        /* Hero Section */
-        .hero {
-            padding: 8rem 5% 4rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            max-width: 1400px;
-            margin: 0 auto;
             min-height: 100vh;
+            background: linear-gradient(#eeeeff, #c8c7ff);
+            transition: background 0.5s;
         }
-
-        .hero-content {
-            flex: 1;
-            max-width: 600px;
+        body.dark {
+            background: linear-gradient(#1a1a2e, #16213e);
+            color: #fff;
         }
-
-        .hero h2 {
-            font-size: 3.5rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            line-height: 1.2;
-            color: var(--dark);
+        header {
+            background: #5350c4;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
         }
-
-        .hero h2 span {
-            color: var(--primary);
+        header h1 {
+            font-size: 2rem;
         }
-
-        .hero p {
-            font-size: 1.1rem;
-            color: var(--gray);
-            margin-bottom: 2rem;
-            line-height: 1.6;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .app-stores {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .app-stores img {
-            height: 45px;
-            border-radius: 10px;
-            transition: transform 0.3s;
-        }
-
-        .app-stores img:hover {
-            transform: translateY(-3px);
-        }
-
-        .hero-image {
-            flex: 1;
+        nav ul {
+            list-style: none;
             display: flex;
             justify-content: center;
-            position: relative;
+            gap: 20px;
         }
-
-        .hero-image img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            animation: float 6s ease-in-out infinite;
+        nav a {
+            color: #fff;
+            text-decoration: none;
         }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
+        main {
+            padding: 20px;
         }
-
-        /* Features Section */
-        .features {
-            padding: 6rem 5%;
-            background-color: white;
+        section {
+            margin-bottom: 40px;
         }
-
-        .section-title {
+        h2 {
+            margin-bottom: 20px;
+        }
+        input, button, textarea {
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background: #5350c4;
+            color: #fff;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background: #3d39ac;
+        }
+        .avatar {
+            font-size: 100px;
             text-align: center;
-            margin-bottom: 4rem;
+            margin: 20px 0;
+            transition: transform 0.5s;
         }
-
-        .section-title h3 {
-            font-size: 2.5rem;
-            color: var(--dark);
-            margin-bottom: 1rem;
+        canvas {
+            border: 1px solid #ccc;
+            margin: 20px 0;
         }
-
-        .section-title p {
-            color: var(--gray);
-            max-width: 700px;
-            margin: 0 auto;
-            font-size: 1.1rem;
+        #arCanvas {
+            display: none;
+            width: 640px;
+            height: 480px;
         }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .feature-card {
-            background-color: var(--light);
-            border-radius: 15px;
-            padding: 2rem;
-            transition: transform 0.3s, box-shadow 0.3s;
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
+        #emergency-button {
+            background: red;
+            font-size: 1.5rem;
+            padding: 20px;
             width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
         }
-
-        .feature-icon {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1.5rem;
+        /* Animated Charts */
+        .bar {
+            background: #5350c4;
+            animation: grow 1s ease-in-out;
         }
-
-        .feature-card h4 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--dark);
+        @keyframes grow {
+            from { height: 0; }
+            to { height: 100%; }
         }
-
-        .feature-card p {
-            color: var(--gray);
-            line-height: 1.6;
+        /* 3D Dashboard Effect */
+        #dashboard {
+            perspective: 1000px;
         }
-
-        /* Health Dashboard Preview */
-        .dashboard-preview {
-            padding: 6rem 5%;
-            background-color: #f5f7ff;
+        #chart {
+            transform-style: preserve-3d;
+            transform: rotateY(20deg);
+            transition: transform 0.5s;
         }
-
-        .dashboard-container {
+        #dashboard:hover #chart {
+            transform: rotateY(0deg);
+        }
+        /* Chatbot CSS (provided, adapted) */
+        #chatbot-toggler {
+            position: fixed;
+            bottom: 30px;
+            right: 35px;
+            border: none;
+            height: 50px;
+            width: 50px;
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            max-width: 1400px;
-            margin: 0 auto;
-            gap: 3rem;
-        }
-
-        .dashboard-content {
-            flex: 1;
-            max-width: 500px;
-        }
-
-        .dashboard-content h3 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-            color: var(--dark);
-        }
-
-        .dashboard-content p {
-            color: var(--gray);
-            margin-bottom: 2rem;
-            line-height: 1.6;
-            font-size: 1.1rem;
-        }
-
-        .dashboard-image {
-            flex: 1;
-            position: relative;
-        }
-
-        .dashboard-image img {
-            max-width: 100%;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-        }
-
-        .stats-overlay {
-            position: absolute;
-            bottom: -30px;
-            right: -30px;
-            background: white;
-            padding: 1.5rem;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            width: 250px;
-        }
-
-        .stats-overlay h5 {
-            font-size: 1rem;
-            color: var(--gray);
-            margin-bottom: 1rem;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-        }
-
-        .stat-item {
-            text-align: center;
-        }
-
-        .stat-item h6 {
-            font-size: 0.9rem;
-            color: var(--gray);
-            margin-bottom: 0.3rem;
-        }
-
-        .stat-item p {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: var(--primary);
-        }
-
-        /* AR Experience Section */
-        .ar-experience {
-            padding: 6rem 5%;
-            background-color: white;
-        }
-
-        .ar-container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            max-width: 1400px;
-            margin: 0 auto;
-            gap: 3rem;
-        }
-
-        .ar-image {
-            flex: 1;
-            position: relative;
-        }
-
-        .ar-image img {
-            max-width: 100%;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-        }
-
-        .ar-content {
-            flex: 1;
-            max-width: 500px;
-        }
-
-        .ar-content h3 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-            color: var(--dark);
-        }
-
-        .ar-content p {
-            color: var(--gray);
-            margin-bottom: 2rem;
-            line-height: 1.6;
-            font-size: 1.1rem;
-        }
-
-        .ar-features {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .ar-feature {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .ar-feature-icon {
-            font-size: 1.5rem;
-            color: var(--primary);
-        }
-
-        .ar-feature-text h5 {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-            color: var(--dark);
-        }
-
-        .ar-feature-text p {
-            color: var(--gray);
-            font-size: 1rem;
-            margin-bottom: 0;
-        }
-
-        /* Testimonials Section */
-        .testimonials {
-            padding: 6rem 5%;
-            background-color: #f5f7ff;
-        }
-
-        .testimonials-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .testimonial-card {
-            background-color: white;
-            border-radius: 15px;
-            padding: 2rem;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s;
-        }
-
-        .testimonial-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .testimonial-header {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .testimonial-avatar {
-            width: 60px;
-            height: 60px;
+            justify-content: center;
+            cursor: pointer;
             border-radius: 50%;
-            object-fit: cover;
+            background: #5350c4;
+            transition: all 0.2s ease;
         }
-
-        .testimonial-user h5 {
-            font-size: 1.2rem;
-            color: var(--dark);
+        body.show-chatbot #chatbot-toggler {
+            transform: rotate(90deg);
         }
-
-        .testimonial-user p {
-            color: var(--gray);
-            font-size: 0.9rem;
+        #chatbot-toggler span {
+            color: #fff;
+            position: absolute;
         }
-
-        .testimonial-rating {
-            color: #ffc107;
-            margin-bottom: 1rem;
+        body.show-chatbot #chatbot-toggler span:first-child,
+        #chatbot-toggler span:last-child {
+           opacity: 0;
         }
-
-        .testimonial-text {
-            color: var(--gray);
-            line-height: 1.6;
+        body.show-chatbot #chatbot-toggler span:last-child {
+            opacity: 1;
+        }
+        .chatbot-popup {
+            position: fixed;
+            right: 35px;
+            bottom: 90px;
+            width: 420px;
+            background: #fff;
+            overflow: hidden;
+            border-radius: 15px;
+            opacity: 0;
+            transform: scale(0.2);
+            transform-origin: bottom right;
+            pointer-events: none;
+            box-shadow: 0 0 128px 0 rgba(0, 0, 0, 0.1), 0 32px 64px -48px rgba(0, 0, 0, 0.5);
+            transition: all 0.1s ease;
+        }
+        body.show-chatbot .chatbot-popup {
+            opacity: 1;
+            pointer-events: auto;
+            transform: scale(1);
+        }
+        .chat-header {
+            display: flex;
+            align-items: center;
+            background: #5350c4;
+            padding: 15px 22px;
+            justify-content: space-between;
+        }
+        .chat-header .header-info {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .header-info .chatbot-logo {
+            height: 35px;
+            width: 35px;
+            padding: 6px;
+            fill: #5350c4;
+            flex-shrink: 0;
+            background: #fff;
+            border-radius: 50%;
+        }
+        .header-info .logo-text {
+            color: #fff;
+            font-size: 1.31rem;
+            font-weight: 600;
+        }
+        .chat-header #close-chatbot {
+            border: none;
+            color: #fff;
+            height: 40px;
+            width: 40px;
+            font-size: 1.9rem;
+            margin-right: -10px;
+            padding-top: 2px;
+            cursor: pointer;
+            border-radius: 50%;
+            background: none;
+            transition: 0.2s ease;
+        }
+        .chat-header #close-chatbot:hover {
+            background: #3d39ac;
+        }
+        .chat-body {
+            font-size: large;
+            padding: 25px 22px;
+            display: flex;
+            gap: 20px;
+            height: 460px;
+            margin-bottom: 82px;
+            overflow-y: auto;
+            flex-direction: column;
+            scrollbar-width: thin;
+            scrollbar-color: #ccccf5 transparent;
+        }
+        .chat-body .message {
+            display: flex;
+            gap: 11px;
+            align-items: center;
+        }
+        .chat-body .bot-message .bot-avatar {
+            height: 35px;
+            width: 35px;
+            padding: 6px;
+            fill: #fff;
+            align-self: flex-end;
+            flex-shrink: 0;
+            margin-bottom: 2px;
+            background: #5350c4;
+            border-radius: 50%;
+        }
+        .chat-body .user-message {
+            flex-direction: column;
+            align-items: flex-end;
+        }
+        .chat-body .message .message-text {
+            padding: 12px 16px;
+            max-width: 75%;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            word-wrap: break-word;
+        }
+        .chat-body .bot-message.thinking .message-text {
+            padding: 2px 16px;
+        }
+        .chat-body .bot-message .message-text {
+            background: #f2f2ff;
+            border-radius: 13px 13px 13px 3px;
+        }
+        .chat-body .user-message .message-text {
+            color: #fff;
+            background: #5350c4;
+            border-radius: 13px 13px 3px 13px;
+        }
+        .chat-body .message-text strong {
+            font-weight: bold;
+        }
+        .chat-body .message-text em {
             font-style: italic;
         }
-
-        /* Pricing Section */
-        .pricing {
-            padding: 6rem 5%;
-            background-color: white;
+        .chat-body .message-text del {
+            text-decoration: line-through;
         }
-
-        .pricing-container {
-            max-width: 1200px;
-            margin: 0 auto;
+        .chat-body .message-text code {
+            background: #e0e0e0;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
         }
-
-        .pricing-tabs {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 3rem;
+        .chat-body .message-text pre {
+            background: #e0e0e0;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-family: monospace;
         }
-
-        .pricing-tab {
-            padding: 0.8rem 1.5rem;
-            background-color: var(--light);
-            border-radius: 30px;
-            cursor: pointer;
-            font-weight: 500;
-            transition: all 0.3s;
-            border: none;
+        .chat-body .message-text blockquote {
+            border-left: 4px solid #5350c4;
+            padding-left: 10px;
+            color: #555;
         }
-
-        .pricing-tab.active {
-            background-color: var(--primary);
-            color: white;
+        .chat-body .message-text a {
+            color: #5350c4;
+            text-decoration: underline;
         }
-
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .pricing-card {
-            background-color: var(--light);
-            border-radius: 15px;
-            padding: 2.5rem 2rem;
-            text-align: center;
-            transition: transform 0.3s, box-shadow 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .pricing-card.popular {
-            border: 2px solid var(--primary);
-        }
-
-        .popular-badge {
-            position: absolute;
-            top: 0;
-            right: 20px;
-            background-color: var(--primary);
-            color: white;
-            padding: 0.3rem 1rem;
-            border-radius: 0 0 10px 10px;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-
-        .pricing-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .pricing-card h4 {
+        .chat-body .message-text h1 {
             font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--dark);
+            margin: 10px 0;
         }
-
-        .pricing-card .price {
-            font-size: 3rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 1.5rem;
+        .chat-body .message-text h2 {
+            font-size: 1.3rem;
+            margin: 10px 0;
         }
-
-        .pricing-card .price span {
-            font-size: 1rem;
-            color: var(--gray);
-        }
-
-        .pricing-features {
-            margin-bottom: 2rem;
-        }
-
-        .pricing-feature {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 0.8rem;
-            color: var(--gray);
-        }
-
-        .pricing-feature i {
-            color: var(--success);
-        }
-
-        /* CTA Section */
-        .cta {
-            padding: 6rem 5%;
-            background: linear-gradient(135deg, var(--primary), #7a78ff);
-            color: white;
-            text-align: center;
-        }
-
-        .cta-container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .cta h3 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .cta p {
+        .chat-body .message-text h3 {
             font-size: 1.1rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
+            margin: 10px 0;
         }
-
-        .cta-buttons {
+        .chat-body .message-text ul, .chat-body .message-text ol {
+            margin: 10px 0 10px 20px;
+        }
+        .chat-body .message-text li {
+            margin: 5px 0;
+        }
+        .chat-body .user-message .attachment {
+            width: 50%;
+            margin-top: -7px;
+            border-radius: 13px 3px 13px 13px;
+        }
+        .chat-body .bot-message .thinking-indicator {
             display: flex;
-            justify-content: center;
-            gap: 1rem;
+            gap: 4px;
+            padding-block: 15px;
         }
-
-        .btn-white {
-            background-color: white;
-            color: var(--primary);
-        }
-
-        .btn-white:hover {
-            background-color: rgba(255, 255, 255, 0.9);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn-transparent {
-            background-color: transparent;
-            border: 2px solid white;
-            color: white;
-        }
-
-        .btn-transparent:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-        }
-
-        /* Footer */
-        footer {
-            background-color: var(--dark);
-            color: white;
-            padding: 4rem 5% 2rem;
-        }
-
-        .footer-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .footer-logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 1.5rem;
-        }
-
-        .footer-logo img {
-            height: 30px;
-        }
-
-        .footer-logo h3 {
-            font-size: 1.2rem;
-            font-weight: 700;
-        }
-
-        .footer-about p {
-            color: #b3b3b3;
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .social-links a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
+        .chat-body .bot-message .thinking-indicator .dot {
+            height: 7px;
+            width: 7px;
+            opacity: 0.7;
             border-radius: 50%;
-            background-color: rgba(255, 255, 255, 0.1);
-            color: white;
-            transition: all 0.3s;
+            background: #6f6bc2;
+            animation: dotPulse 1.8s ease-in-out infinite;
         }
-
-        .social-links a:hover {
-            background-color: var(--primary);
-            transform: translateY(-3px);
+        .chat-body .bot-message .thinking-indicator .dot:nth-child(1) {
+            animation-delay: 0.2s;
         }
-
-        .footer-links h4 {
-            font-size: 1.2rem;
-            margin-bottom: 1.5rem;
-            position: relative;
-            padding-bottom: 0.5rem;
+        .chat-body .bot-message .thinking-indicator .dot:nth-child(2) {
+            animation-delay: 0.3s;
         }
-
-        .footer-links h4::after {
-            content: '';
+        .chat-body .bot-message .thinking-indicator .dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+        @keyframes dotPulse {
+            0%, 44% {
+                transform: translateY(0);
+            }
+            28% {
+                opacity: 0.4;
+                transform: translateY(-4px);
+            }
+            44% {
+                opacity: 0.2;
+            }
+        }
+        .chat-footer {
             position: absolute;
             bottom: 0;
-            left: 0;
-            width: 40px;
-            height: 3px;
-            background-color: var(--primary);
+            width: 100%;
+            background: #fff;
+            padding: 15px 22px 20px;
         }
-
-        .footer-links ul {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-links a {
-            color: #b3b3b3;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .footer-links a:hover {
-            color: white;
-        }
-
-        .footer-newsletter p {
-            color: #b3b3b3;
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
-        }
-
-        .newsletter-form {
+        .chat-footer .chat-form {
             display: flex;
-            gap: 0.5rem;
-        }
-
-        .newsletter-form input {
-            flex: 1;
-            padding: 0.8rem;
-            border-radius: 5px;
-            border: none;
-            background-color: rgba(255, 255, 255, 0.1);
-            color: white;
-        }
-
-        .newsletter-form input::placeholder {
-            color: #b3b3b3;
-        }
-
-        .newsletter-form button {
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 5px;
-            padding: 0 1.2rem;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .newsletter-form button:hover {
-            background-color: var(--primary-dark);
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 3rem;
-            margin-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: #b3b3b3;
-            font-size: 0.9rem;
-        }
-
-        /* Health AI Chatbot */
-        .health-chatbot {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 999;
-        }
-
-        .chatbot-toggle {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background-color: var(--primary);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            cursor: pointer;
-            box-shadow: 0 5px 20px rgba(93, 91, 255, 0.3);
-            transition: all 0.3s;
-            border: none;
-        }
-
-        .chatbot-toggle:hover {
-            transform: scale(1.1);
-        }
-
-        .chatbot-container {
-            position: absolute;
-            bottom: 80px;
-            right: 0;
-            width: 350px;
-            background-color: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            transform: scale(0);
-            transform-origin: bottom right;
-            transition: transform 0.3s;
-            opacity: 0;
-            visibility: hidden;
-        }
-
-        .chatbot-container.active {
-            transform: scale(1);
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .chatbot-header {
-            background-color: var(--primary);
-            color: white;
-            padding: 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .chatbot-header h4 {
-            font-size: 1.2rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .chatbot-header i {
-            font-size: 1.2rem;
-        }
-
-        .chatbot-close {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.2rem;
-            cursor: pointer;
-        }
-
-        .chatbot-body {
-            height: 400px;
-            padding: 1rem;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .chatbot-message {
-            max-width: 80%;
-            padding: 0.8rem 1rem;
-            border-radius: 15px;
-            font-size: 0.9rem;
-            line-height: 1.5;
-        }
-
-        .bot-message {
-            background-color: #f0f0ff;
-            align-self: flex-start;
-            border-bottom-left-radius: 5px;
-        }
-
-        .user-message {
-            background-color: var(--primary);
-            color: white;
-            align-self: flex-end;
-            border-bottom-right-radius: 5px;
-        }
-
-        .chatbot-input {
-            display: flex;
-            padding: 1rem;
-            border-top: 1px solid #eee;
-        }
-
-        .chatbot-input input {
-            flex: 1;
-            padding: 0.8rem;
-            border: 1px solid #eee;
-            border-radius: 30px;
-            outline: none;
-        }
-
-        .chatbot-input button {
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            margin-left: 0.5rem;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .chatbot-input button:hover {
-            background-color: var(--primary-dark);
-        }
-
-        /* Responsive Styles */
-        @media (max-width: 992px) {
-            .hero {
-                flex-direction: column;
-                text-align: center;
-                padding-top: 6rem;
-            }
-
-            .hero-content {
-                margin-bottom: 3rem;
-            }
-
-            .hero-buttons {
-                justify-content: center;
-            }
-
-            .app-stores {
-                justify-content: center;
-            }
-
-            .dashboard-container, .ar-container {
-                flex-direction: column;
-            }
-
-            .dashboard-content, .ar-content {
-                text-align: center;
-                max-width: 100%;
-            }
-
-            .stats-overlay {
-                right: 0;
-                left: 0;
-                margin: 0 auto;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .nav-links, .cta-buttons {
-                display: none;
-            }
-
-            .mobile-menu-btn {
-                display: block;
-            }
-
-            .hero h2 {
-                font-size: 2.5rem;
-            }
-
-            .section-title h3 {
-                font-size: 2rem;
-            }
-
-            .dashboard-content h3, .ar-content h3, .cta h3 {
-                font-size: 2rem;
-            }
-
-            .pricing-tabs {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .cta-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .hero h2 {
-                font-size: 2rem;
-            }
-
-            .hero-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .app-stores {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .chatbot-container {
-                width: 300px;
-            }
-        }
-
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .fade-in {
-            animation: fadeIn 1s ease forwards;
-        }
-
-        .delay-1 { animation-delay: 0.2s; }
-        .delay-2 { animation-delay: 0.4s; }
-        .delay-3 { animation-delay: 0.6s; }
-        .delay-4 { animation-delay: 0.8s; }
-        .delay-5 { animation-delay: 1s; }
-
-        /* Health Avatar Animation */
-        .health-avatar {
-            width: 100px;
-            height: 100px;
-            background-color: var(--primary);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 2rem;
-            margin: 0 auto 1rem;
             position: relative;
-            overflow: hidden;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
-        /* Emergency Button */
-        .emergency-btn {
-            position: fixed;
-            bottom: 30px;
-            left: 30px;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background-color: var(--danger);
-            color: white;
-            display: flex;
             align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            cursor: pointer;
-            box-shadow: 0 5px 20px rgba(244, 67, 54, 0.3);
-            transition: all 0.3s;
+            background: #fff;
+            border-radius: 32px;
+            outline: 1px solid #cccce5;
+        }
+        .chat-footer .chat-form:focus-within {
+            outline: 2px solid #5350c4;
+        }
+        .chat-form .message-input {
             border: none;
-            z-index: 999;
+            outline: none;
+            height: 47px;
+            width: 100%;
+            resize: none;
+            max-height: 180px;
+            white-space: pre-wrap;
+            font-size: 0.95rem;
+            padding: 14px 0 12px 18px;
+            border-radius: inherit;
+            scrollbar-width: thin;
+            scrollbar-color: transparent transparent;
         }
-
-        .emergency-btn:hover {
-            transform: scale(1.1);
+        .chat-form .message-input:hover {
+            scrollbar-color: #ccccf5 transparent;
         }
-
-        /* AR Demo Modal */
-        .ar-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
+        .chat-form .chat-controls {
+            display: flex;
+            height: 47px;
+            gap: 3px;
+            align-items: center;
+            align-self: flex-end;
+            padding-right: 6px;
+        }
+        .chat-form .chat-controls button {
+            height: 35px;
+            width: 35px;
+            border: none;
+            font-size: 1.15rem;
+            cursor: pointer;
+            color: #706db0;
+            background: none;
+            border-radius: 50%;
+            transition: 0.2s ease;
+        }
+        .chat-form .chat-controls #send-message {
+            color: #fff;
+            display: none;
+            background: #5350c4;
+        }
+        .chat-form .message-input:valid ~ .chat-controls #send-message {
+            display: block;
+        }
+        .chat-form .chat-controls #send-message:hover {
+            background: #3d39ac;
+        }
+        .chat-form .chat-controls button:hover {
+            background: #f1f1ff;
+        }
+        .chat-form .file-upload-wrapper {
+            height: 35px;
+            width: 35px;
+            position: relative;
+        }
+        .chat-form .file-upload-wrapper :where(img, button) {
+            position: absolute;
+        }
+        .chat-form .file-upload-wrapper img {
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1001;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s;
+            object-fit: cover;
+            border-radius: 50%;
         }
-
-        .ar-modal.active {
-            opacity: 1;
+        .chat-form .file-upload-wrapper #file-cancel {
+            color: #ff0000;
+            background: #fff;
+        }
+        .chat-form .file-upload-wrapper :where(img, #file-cancel),
+        .chat-form .file-upload-wrapper.file-uploaded #file-upload {
+            display: none;
+        }
+        .chat-form .file-upload-wrapper.file-uploaded img,
+        .chat-form .file-upload-wrapper.file-uploaded:hover #file-cancel {
+            display: block;
+        }
+        em-emoji-picker {
+            position: absolute;
+            left: 50%;
+            top: -337px;
+            width: 100%;
+            max-width: 350px;
+            max-height: 330px;
+            visibility: hidden;
+            transform: translateX(-50%);
+        }
+        body.show-emoji-picker em-emoji-picker {
             visibility: visible;
         }
-
-        .ar-modal-content {
-            background-color: white;
-            border-radius: 15px;
-            width: 90%;
-            max-width: 800px;
-            padding: 2rem;
-            position: relative;
-            transform: scale(0.8);
-            transition: transform 0.3s;
-        }
-
-        .ar-modal.active .ar-modal-content {
-            transform: scale(1);
-        }
-
-        .ar-modal-close {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--gray);
-        }
-
-        .ar-modal h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-            color: var(--dark);
-        }
-
-        .ar-modal p {
-            color: var(--gray);
-            margin-bottom: 1.5rem;
-        }
-
-        .ar-demo-container {
-            position: relative;
-            width: 100%;
-            height: 400px;
-            background-color: #f5f5f5;
-            border-radius: 10px;
-            overflow: hidden;
-            margin-bottom: 1.5rem;
-        }
-
-        .ar-demo-placeholder {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            color: var(--gray);
-        }
-
-        .ar-demo-placeholder i {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            display: block;
-            color: var(--primary);
-        }
-
-        .ar-modal-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: flex-end;
+        /* Responsive */
+        @media screen and (max-width: 520px) {
+            #chatbot-toggler {
+                bottom: 20px;
+                right: 20px;
+            }
+            .chatbot-popup {
+                width: 100%;
+                height: 100%;
+                bottom: 0;
+                right: 0;
+                border-radius: 0;
+            }
+            .chatbot-popup .chat-header {
+                padding: 12px 15px;
+            }
+            .chat-body {
+                height: calc(90% - 55px);
+                padding: 25px 15px;
+            }
+            .chat-footer {
+                padding: 10px 15px 15px;
+            }
+            .chat-form .file-upload-wrapper.file-uploaded #file-cancel {
+                opacity: 0;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
     <header>
-        <nav class="navbar">
-            <div class="logo">
-                <img src="https://via.placeholder.com/40" alt="Health AI Coach Logo">
-                <h1>Health AI</h1>
-            </div>
-            <div class="nav-links">
-                <a href="#features">Features</a>
-                <a href="#dashboard">Dashboard</a>
-                <a href="#ar">AR Experience</a>
-                <a href="#testimonials">Testimonials</a>
-                <a href="#pricing">Pricing</a>
-            </div>
-            <div class="cta-buttons">
-                <button class="btn btn-outline">Login</button>
-                <button class="btn btn-primary">Sign Up</button>
-            </div>
-            <button class="mobile-menu-btn">
-                <i class="fas fa-bars"></i>
-            </button>
+        <h1>Smart Health App</h1>
+        <nav>
+            <ul>
+                <li><a href="#dashboard">Dashboard</a></li>
+                <li><a href="#fitness">Fitness & Meditation</a></li>
+                <li><a href="#nutrition">Nutrition</a></li>
+                <li><a href="#mental">Mental Health</a></li>
+                <li><a href="#community">Community</a></li>
+                <li><a href="#vision">AI Vision</a></li>
+                <li><a href="#gamification">Challenges</a></li>
+                <li><a href="#emergency">Emergency</a></li>
+                <li><a href="#settings">Settings</a></li>
+            </ul>
         </nav>
     </header>
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content fade-in">
-            <h2><span>AI-Powered</span> Health Coach in Your Pocket</h2>
-            <p>Revolutionize your health journey with our intelligent AI coach that analyzes your data, predicts potential issues, and provides personalized recommendations to optimize your wellbeing.</p>
-            <div class="hero-buttons">
-                <button class="btn btn-primary">Get Started</button>
-                <button class="btn btn-outline">How It Works</button>
+    <main>
+        <section id="dashboard">
+            <h2>Health AI Coach & Predictive Health</h2>
+            <div class="avatar" id="healthAvatar">😊</div>
+            <canvas id="chart" width="400" height="200"></canvas>
+            <input id="heartRate" type="number" placeholder="Heart Rate">
+            <input id="sleepHours" type="number" placeholder="Sleep Hours">
+            <input id="steps" type="number" placeholder="Steps">
+            <button id="logData">Log Data</button>
+            <button id="getInsights">Get Insights</button>
+            <button id="predictHealth">Predict Health</button>
+            <div id="insights"></div>
+            <div id="predictions"></div>
+            <button id="generateReport">Generate PDF Report</button>
+        </section>
+        <section id="fitness">
+            <h2>AR Fitness & Meditation</h2>
+            <canvas id="arCanvas" width="640" height="480"></canvas>
+            <button id="startARFitness">Start AR Fitness</button>
+            <button id="startARMeditation">Start AR Meditation</button>
+            <audio id="meditationMusic" loop>
+                <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+            </audio>
+        </section>
+        <section id="nutrition">
+            <h2>Smart Nutrition</h2>
+            <input type="file" accept="image/*" id="foodImage">
+            <input id="weight" type="number" placeholder="Your Weight (kg)">
+            <select id="goal">
+                <option value="loss">Weight Loss</option>
+                <option value="gain">Muscle Gain</option>
+            </select>
+            <button id="analyzeFood">Analyze Food</button>
+            <button id="generateMealPlan">Generate Meal Plan</button>
+            <div id="nutritionInfo"></div>
+            <div id="mealPlan"></div>
+        </section>
+        <section id="mental">
+            <h2>Mental Health Tracker</h2>
+            <form id="moodForm">
+                <label>How happy are you? (1-10)</label><input type="number" id="happy" min="1" max="10">
+                <label>Stress level? (1-10)</label><input type="number" id="stress" min="1" max="10">
+                <label>Energy level? (1-10)</label><input type="number" id="energy" min="1" max="10">
+                <button type="submit">Submit</button>
+            </form>
+            <div id="mentalInsights"></div>
+        </section>
+        <section id="community">
+            <h2>Health Social Community</h2>
+            <textarea id="postText" placeholder="Share your achievement"></textarea>
+            <button id="postButton">Post</button>
+            <div id="posts"></div>
+        </section>
+        <section id="vision">
+            <h2>AI Vision for Medical</h2>
+            <input type="file" accept="image/*" id="visionImage">
+            <button id="analyzeVision">Analyze</button>
+            <div id="visionInfo"></div>
+        </section>
+        <section id="gamification">
+            <h2>Health Challenges (Gamification)</h2>
+            <div id="challenges">
+                <p>Drink 2L water <button class="completeChallenge" data-challenge="water">Complete</button></p>
+                <p>Walk 5000 steps <button class="completeChallenge" data-challenge="steps">Complete</button></p>
             </div>
-            <div class="app-stores">
-                <img src="https://via.placeholder.com/150x45" alt="App Store">
-                <img src="https://via.placeholder.com/150x45" alt="Google Play">
-            </div>
-        </div>
-        <div class="hero-image fade-in delay-1">
-            <img src="https://via.placeholder.com/500x800" alt="Health AI Coach App">
-        </div>
-    </section>
-
-    <!-- Features Section -->
-    <section class="features" id="features">
-        <div class="section-title fade-in">
-            <h3>Smart Health Features</h3>
-            <p>Discover how our AI-powered health coach can transform your wellbeing with cutting-edge technology</p>
-        </div>
-        <div class="features-grid">
-            <div class="feature-card fade-in delay-1">
-                <div class="feature-icon">
-                    <i class="fas fa-brain"></i>
-                </div>
-                <h4>AI Health Coach</h4>
-                <p>Get personalized health insights and recommendations based on your sleep patterns, heart rate, activity levels, and more.</p>
-            </div>
-            <div class="feature-card fade-in delay-2">
-                <div class="feature-icon">
-                    <i class="fas fa-chart-line"></i>
-                </div>
-                <h4>Predictive Analysis</h4>
-                <p>Our AI detects potential health issues before they occur, giving you early warnings to take preventive action.</p>
-            </div>
-            <div class="feature-card fade-in delay-3">
-                <div class="feature-icon">
-                    <i class="fas fa-vr-cardboard"></i>
-                </div>
-                <h4>AR Fitness</h4>
-                <p>Experience immersive workouts with virtual trainers in your living space through augmented reality.</p>
-            </div>
-            <div class="feature-card fade-in delay-1">
-                <div class="feature-icon">
-                    <i class="fas fa-utensils"></i>
-                </div>
-                <h4>Smart Nutrition</h4>
-                <p>Scan your meals to get calorie counts and nutritional information, with personalized diet recommendations.</p>
-            </div>
-            <div class="feature-card fade-in delay-2">
-                <div class="feature-icon">
-                    <i class="fas fa-procedures"></i>
-                </div>
-                <h4>Hospital Integration</h4>
-                <p>Securely share your health data with doctors and hospitals for better coordinated care.</p>
-            </div>
-            <div class="feature-card fade-in delay-3">
-                <div class="feature-icon">
-                    <i class="fas fa-users"></i>
-                </div>
-                <h4>Health Community</h4>
-                <p>Connect with others sharing similar health goals for motivation and support.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Health Dashboard Preview -->
-    <section class="dashboard-preview" id="dashboard">
-        <div class="dashboard-container">
-            <div class="dashboard-content fade-in">
-                <h3>Your Health Dashboard</h3>
-                <p>Track all your health metrics in one place with our beautiful, intuitive dashboard. See trends over time, get personalized insights, and understand what your data means for your wellbeing.</p>
-                <button class="btn btn-primary">Explore Dashboard</button>
-            </div>
-            <div class="dashboard-image fade-in delay-1">
-                <img src="https://via.placeholder.com/600x400" alt="Health Dashboard">
-                <div class="stats-overlay">
-                    <h5>Your Weekly Stats</h5>
-                    <div class="stats-grid">
-                        <div class="stat-item">
-                            <h6>Steps</h6>
-                            <p>32,456</p>
-                        </div>
-                        <div class="stat-item">
-                            <h6>Sleep</h6>
-                            <p>7.2h</p>
-                        </div>
-                        <div class="stat-item">
-                            <h6>Water</h6>
-                            <p>5.8L</p>
-                        </div>
-                        <div class="stat-item">
-                            <h6>Stress</h6>
-                            <p>Low</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- AR Experience Section -->
-    <section class="ar-experience" id="ar">
-        <div class="ar-container">
-            <div class="ar-image fade-in">
-                <img src="https://via.placeholder.com/600x400" alt="AR Experience">
-                <button class="btn btn-primary" id="ar-demo-btn" style="position: absolute; bottom: 20px; left: 20px;">Try AR Demo</button>
-            </div>
-            <div class="ar-content fade-in delay-1">
-                <h3>Augmented Reality Health</h3>
-                <p>Transform your space into a personal fitness studio or meditation retreat with our cutting-edge AR technology.</p>
-                <div class="ar-features">
-                    <div class="ar-feature">
-                        <div class="ar-feature-icon">
-                            <i class="fas fa-dumbbell"></i>
-                        </div>
-                        <div class="ar-feature-text">
-                            <h5>Virtual Personal Trainer</h5>
-                            <p>See a life-size trainer demonstrating exercises in your room with perfect form guidance.</p>
-                        </div>
-                    </div>
-                    <div class="ar-feature">
-                        <div class="ar-feature-icon">
-                            <i class="fas fa-spa"></i>
-                        </div>
-                        <div class="ar-feature-text">
-                            <h5>Immersive Meditation</h5>
-                            <p>Transport yourself to peaceful natural environments without leaving your home.</p>
-                        </div>
-                    </div>
-                    <div class="ar-feature">
-                        <div class="ar-feature-icon">
-                            <i class="fas fa-eye"></i>
-                        </div>
-                        <div class="ar-feature-text">
-                            <h5>Medical Vision AI</h5>
-                            <p>Scan wounds or skin conditions for preliminary analysis and recommendations.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section class="testimonials" id="testimonials">
-        <div class="testimonials-container">
-            <div class="section-title fade-in">
-                <h3>What Our Users Say</h3>
-                <p>Join thousands of people who have transformed their health with our AI coach</p>
-            </div>
-            <div class="testimonials-grid">
-                <div class="testimonial-card fade-in delay-1">
-                    <div class="testimonial-header">
-                        <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="User" class="testimonial-avatar">
-                        <div class="testimonial-user">
-                            <h5>Sarah Johnson</h5>
-                            <p>Diabetes Management</p>
-                        </div>
-                    </div>
-                    <div class="testimonial-rating">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <p class="testimonial-text">"The AI coach helped me understand patterns in my blood sugar levels I never noticed before. It's like having a personal doctor in my pocket!"</p>
-                </div>
-                <div class="testimonial-card fade-in delay-2">
-                    <div class="testimonial-header">
-                        <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="User" class="testimonial-avatar">
-                        <div class="testimonial-user">
-                            <h5>Michael Chen</h5>
-                            <p>Fitness Enthusiast</p>
-                        </div>
-                    </div>
-                    <div class="testimonial-rating">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <p class="testimonial-text">"The AR workouts are game-changing. Having a virtual trainer in my living room keeps me motivated and ensures I'm doing exercises correctly."</p>
-                </div>
-                <div class="testimonial-card fade-in delay-3">
-                    <div class="testimonial-header">
-                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="User" class="testimonial-avatar">
-                        <div class="testimonial-user">
-                            <h5>Emma Rodriguez</h5>
-                            <p>Mental Health</p>
-                        </div>
-                    </div>
-                    <div class="testimonial-rating">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
-                    </div>
-                    <p class="testimonial-text">"The mood tracking and mental health suggestions have been incredibly helpful for managing my anxiety. I feel more in control of my wellbeing."</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Pricing Section -->
-    <section class="pricing" id="pricing">
-        <div class="pricing-container">
-            <div class="section-title fade-in">
-                <h3>Simple, Transparent Pricing</h3>
-                <p>Choose the plan that fits your health goals and budget</p>
-            </div>
-            <div class="pricing-tabs">
-                <button class="pricing-tab active">Monthly</button>
-                <button class="pricing-tab">Yearly (Save 20%)</button>
-            </div>
-            <div class="pricing-grid">
-                <div class="pricing-card fade-in delay-1">
-                    <h4>Basic</h4>
-                    <div class="price">$9.99<span>/month</span></div>
-                    <div class="pricing-features">
-                        <div class="pricing-feature">
-                            <i class="fas fa-check"></i>
-                            <span>Health Tracking</span>
-                        </div>
-                        <div class="pricing-feature">
-                            <i class="fas fa-check"></i>
-                            <span>Basic Insights</span>
-                        </div>
-                        <div class="pricing-feature">
-                            <i class="fas fa-check"></i>
-                            <span>Community Access</span>
-                        </div>
-                        <div class="pricing-feature">
-                            <i class="fas fa-times"></i>
-                            <span>AR Features</span>
-                        </div>
-                        <div class="pricing-feature">
-                            <i class="fas fa-times"></i>
-                            <span>Predictive Analysis</span>
-                        </div>
-                    </div>
-                    <button class="btn btn-outline">Get Started</button>
-                </div>
-                <div class="pricing-card popular fade-in delay-2">
-                    <div class="popular-badge">Most Popular</div>
-                    <h4>Premium</h4>
-                    <div class="price">$19.99<span>/month</span></div>
-                    <div class="pricing-features">
-                        <div class="pricing-feature">
-                            <i class="fas fa-check"></i>
-                            <span>All Basic Features</span>
-                        </div>
-                        <div class="pricing-feature">
-                            <i class="fas fa-check"></i>
-                            <span>Advanced AI Insights</span>
-                        </div>
-                        <div class="pricing-feature">
-                            <i class="fas fa-check"></i>
-                            <span>AR Fitness & Meditation</span>
-                        </div>
-                        <div class="pricing-feature">
-                            <i class="fas fa-check"></i>
-                            <span>Predictive Health</span>
-                        </div>
-                        <div class="pricing-feature">
-                            <i class="fas fa-check"></i>
-                            <span>Doctor Integration</span>
-                        </div>
-                    </div>
-                    <button class="btn btn-primary">Get Started</button>
-                </div>
-                <div class="pricing-card fade-in delay-3">
-                    <h4>Family</h4>
-                    <div class="price">$29.99<span>/month</span></div>
-                    <div class="pricing-features">
-                        <div class="pricing-feature">
-                            <i class="fas fa-check"></i>
-                            <span>All Premium Features</span>
-                        </div>
-                        <div class="pricing-feature">
-                            <i class="fas fa-check"></i>
-                            <span>Up to 5 Users</span>
-                        </div>
-                        <div class="pricing-feature">
-                            <i class="fas fa-check"></i>
-                            <span>Family Health Reports</span>
-                        </div>
-                        <div class="pricing-feature">
-                            <i class="fas fa-check"></i>
-                            <span>Priority Support</span>
-                        </div>
-                        <div class="pricing-feature">
-                            <i class="fas fa-check"></i>
-                            <span>Emergency Alerts</span>
-                        </div>
-                    </div>
-                    <button class="btn btn-outline">Get Started</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="cta">
-        <div class="cta-container fade-in">
-            <h3>Ready to Transform Your Health?</h3>
-            <p>Join thousands of users who have taken control of their wellbeing with our AI-powered health coach.</p>
-            <div class="cta-buttons">
-                <button class="btn btn-white">Start Free Trial</button>
-                <button class="btn btn-transparent">See All Features</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="footer-container">
-            <div class="footer-about">
-                <div class="footer-logo">
-                    <img src="https://via.placeholder.com/30" alt="Health AI Coach Logo">
-                    <h3>Health AI</h3>
-                </div>
-                <p>Revolutionizing personal healthcare through artificial intelligence and innovative technology.</p>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                </div>
-            </div>
-            <div class="footer-links">
-                <h4>Company</h4>
-                <ul>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Careers</a></li>
-                    <li><a href="#">Press</a></li>
-                    <li><a href="#">Blog</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-            </div>
-            <div class="footer-links">
-                <h4>Product</h4>
-                <ul>
-                    <li><a href="#">Features</a></li>
-                    <li><a href="#">Pricing</a></li>
-                    <li><a href="#">API</a></li>
-                    <li><a href="#">Integrations</a></li>
-                    <li><a href="#">Roadmap</a></li>
-                </ul>
-            </div>
-            <div class="footer-links">
-                <h4>Resources</h4>
-                <ul>
-                    <li><a href="#">Help Center</a></li>
-                    <li><a href="#">Community</a></li>
-                    <li><a href="#">Tutorials</a></li>
-                    <li><a href="#">Webinars</a></li>
-                    <li><a href="#">Research</a></li>
-                </ul>
-            </div>
-            <div class="footer-newsletter">
-                <h4>Newsletter</h4>
-                <p>Subscribe to get health tips and product updates.</p>
-                <form class="newsletter-form">
-                    <input type="email" placeholder="Your email">
-                    <button type="submit"><i class="fas fa-paper-plane"></i></button>
-                </form>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2023 Health AI Coach. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
-        </div>
-    </footer>
-
-    <!-- Health AI Chatbot -->
-    <div class="health-chatbot">
-        <button class="chatbot-toggle" id="chatbot-toggle">
-            <i class="fas fa-robot"></i>
-        </button>
-        <div class="chatbot-container" id="chatbot-container">
-            <div class="chatbot-header">
-                <h4><i class="fas fa-robot"></i> Health AI Coach</h4>
-                <button class="chatbot-close" id="chatbot-close">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div class="chatbot-body" id="chatbot-body">
-                <div class="chatbot-message bot-message">
-                    Hello! I'm your Health AI Coach. How can I help you today?
-                </div>
-            </div>
-            <div class="chatbot-input">
-                <input type="text" placeholder="Ask me anything about health..." id="chatbot-input">
-                <button id="chatbot-send"><i class="fas fa-paper-plane"></i></button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Emergency Button -->
-    <button class="emergency-btn" id="emergency-btn">
-        <i class="fas fa-plus"></i>
+            <div id="points">Points: 0</div>
+            <div id="progressPath" style="width: 0%; height: 20px; background: green; transition: width 0.5s;"></div>
+        </section>
+        <section id="emergency">
+            <h2>Smart Emergency Mode</h2>
+            <button id="emergencyButton">Emergency</button>
+        </section>
+        <section id="settings">
+            <h2>Settings</h2>
+            <p>Integrate with wearables: Placeholder</p>
+            <p>Offline mode: Data saved locally</p>
+            <p>Hospital integration: Consent to share data (placeholder)</p>
+            <input id="medication" placeholder="Medication Name">
+            <button id="setReminder">Set Reminder</button>
+            <p>Nearest pharmacy: Placeholder (use location)</p>
+        </section>
+    </main>
+    <!-- Chatbot Popup (Health AI Coach) -->
+    <button id="chatbot-toggler">
+        <span class="material-symbols-rounded">mode_comment</span>
+        <span class="material-symbols-rounded">close</span>
     </button>
-
-    <!-- AR Demo Modal -->
-    <div class="ar-modal" id="ar-modal">
-        <div class="ar-modal-content">
-            <button class="ar-modal-close" id="ar-modal-close">
-                <i class="fas fa-times"></i>
-            </button>
-            <h3>Try Our AR Experience</h3>
-            <p>Point your camera at a flat surface to place the virtual trainer in your space.</p>
-            <div class="ar-demo-container">
-                <div class="ar-demo-placeholder">
-                    <i class="fas fa-vr-cardboard"></i>
-                    <p>AR Experience will appear here</p>
+    <div class="chatbot-popup">
+        <div class="chat-header">
+            <div class="header-info">
+                <svg class="chatbot-logo" xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 1024 1024">
+                    <path d="M738.3 287.6H285.7c-59 0-106.8 47.8-106.8 106.8v303.1c0 59 47.8 106.8 106.8 106.8h81.5v111.1c0 .7.8 1.1 1.4 .7l166.9-110.6 41.8-.8h117.4l43.6-.4c59 0 106.8-47.8 106.8-106.8V394.5c0-59-47.8-106.9-106.8-106.9zM351.7 448.2c0-29.5 23.9-53.5 53.5-53.5s53.5 23.9 53.5 53.5-23.9 53.5-53.5 53.5-53.5-23.9-53.5-53.5zm157.9 267.1c-67.8 0-123.8-47.5-132.3-109h264.6c-8.6 61.5-64.5 109-132.3 109zm110-213.7c-29.5 0-53.5-23.9-53.5-53.5s23.9-53.5 53.5-53.5 53.5 23.9 53.5 53.5-23.9 53.5-53.5 53.5zM867.2 644.5V453.1h26.5c19.4 0 35.1 15.7 35.1 35.1v121.1c0 19.4-15.7 35.1-35.1 35.1h-26.5zM95.2 609.4V488.2c0-19.4 15.7-35.1 35.1-35.1h26.5v191.3h-26.5c-19.4 0-35.1-15.7-35.1-35.1zM561.5 149.6c0 23.4-15.6 43.3-36.9 49.7v44.9h-30v-44.9c-21.4-6.5-36.9-26.3-36.9-49.7 0-28.6 23.3-51.9 51.9-51.9s51.9 23.3 51.9 51.9z"></path>
+                </svg>
+                <h2 class="logo-text">Health AI Coach</h2>
+            </div>
+            <button id="close-chatbot" class="material-symbols-rounded">keyboard_arrow_down</button>
+        </div>
+        <div class="chat-body">
+            <div class="message bot-message">
+                <svg class="bot-avatar" xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 1024 1024">
+                    <path d="M738.3 287.6H285.7c-59 0-106.8 47.8-106.8 106.8v303.1c0 59 47.8 106.8 106.8 106.8h81.5v111.1c0 .7.8 1.1 1.4 .7l166.9-110.6 41.8-.8h117.4l43.6-.4c59 0 106.8-47.8 106.8-106.8V394.5c0-59-47.8-106.9-106.8-106.9zM351.7 448.2c0-29.5 23.9-53.5 53.5-53.5s53.5 23.9 53.5 53.5-23.9 53.5-53.5 53.5-53.5-23.9-53.5-53.5zm157.9 267.1c-67.8 0-123.8-47.5-132.3-109h264.6c-8.6 61.5-64.5 109-132.3 109zm110-213.7c-29.5 0-53.5-23.9-53.5-53.5s23.9-53.5 53.5-53.5 53.5 23.9 53.5 53.5-23.9 53.5-53.5 53.5zM867.2 644.5V453.1h26.5c19.4 0 35.1 15.7 35.1 35.1v121.1c0 19.4-15.7 35.1-35.1 35.1h-26.5zM95.2 609.4V488.2c0-19.4 15.7-35.1 35.1-35.1h26.5v191.3h-26.5c-19.4 0-35.1-15.7-35.1-35.1zM561.5 149.6c0 23.4-15.6 43.3-36.9 49.7v44.9h-30v-44.9c-21.4-6.5-36.9-26.3-36.9-49.7 0-28.6 23.3-51.9 51.9-51.9s51.9 23.3 51.9 51.9z"></path>
+                </svg>
+                <div class="message-text">
+                    Hey there 👋 <br /> I'm your Health AI Coach. Ask me anything about your health!
                 </div>
             </div>
-            <div class="ar-modal-buttons">
-                <button class="btn btn-outline">Learn More</button>
-                <button class="btn btn-primary">Start AR Session</button>
-            </div>
+        </div>
+        <div class="chat-footer">
+            <form action="#" class="chat-form">
+                <textarea placeholder="Message..." class="message-input" required></textarea>
+                <div class="chat-controls">
+                    <button type="button" id="emoji-picker" class="material-symbols-outlined">sentiment_satisfied</button>
+                    <div class="file-upload-wrapper">
+                        <input type="file" accept="image/*" id="file-input" hidden>
+                        <img src="#">
+                        <button type="button" id="file-upload" class="material-symbols-rounded">attach_file</button>
+                        <button type="button" id="file-cancel" class="material-symbols-rounded">close</button>
+                    </div>
+                    <button type="submit" id="send-message" class="material-symbols-rounded">arrow_upward</button>
+                </div>
+            </form>
         </div>
     </div>
-
+    <!-- Emoji Picker -->
+    <script src="https://cdn.jsdelivr.net/npm/emoji-mart@latest/dist/browser.js"></script>
     <script>
-        // Mobile Menu Toggle
-        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-        const navLinks = document.querySelector('.nav-links');
-        const ctaButtons = document.querySelector('.cta-buttons');
-
-        mobileMenuBtn.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            ctaButtons.classList.toggle('active');
-        });
-
-        // Chatbot Toggle
-        const chatbotToggle = document.getElementById('chatbot-toggle');
-        const chatbotContainer = document.getElementById('chatbot-container');
-        const chatbotClose = document.getElementById('chatbot-close');
-        const chatbotBody = document.getElementById('chatbot-body');
-        const chatbotInput = document.getElementById('chatbot-input');
-        const chatbotSend = document.getElementById('chatbot-send');
-
-        chatbotToggle.addEventListener('click', () => {
-            chatbotContainer.classList.toggle('active');
-        });
-
-        chatbotClose.addEventListener('click', () => {
-            chatbotContainer.classList.remove('active');
-        });
-
-        // Chatbot Functionality
-        const healthResponses = [
-            "Based on your recent sleep data, I recommend trying to go to bed 30 minutes earlier tonight.",
-            "Your activity levels have been great this week! Keep up the good work.",
-            "I notice your stress levels were higher yesterday. Would you like some meditation exercises?",
-            "Your nutrition scan shows you're getting enough protein but could use more vegetables.",
-            "Based on your heart rate variability, you might be coming down with something. Make sure to rest.",
-            "Your step count is 20% higher than last week! That's excellent progress.",
-            "I can schedule a reminder for your medication if you'd like.",
-            "Would you like me to analyze that skin photo you just took?",
-            "Your hydration levels are good today. Remember to drink water regularly.",
-            "Based on your data, you might want to reduce caffeine intake after 2 PM for better sleep."
-        ];
-
-        function addBotMessage(message) {
-            const messageElement = document.createElement('div');
-            messageElement.classList.add('chatbot-message', 'bot-message');
-            messageElement.textContent = message;
-            chatbotBody.appendChild(messageElement);
-            chatbotBody.scrollTop = chatbotBody.scrollHeight;
-        }
-
-        function addUserMessage(message) {
-            const messageElement = document.createElement('div');
-            messageElement.classList.add('chatbot-message', 'user-message');
-            messageElement.textContent = message;
-            chatbotBody.appendChild(messageElement);
-            chatbotBody.scrollTop = chatbotBody.scrollHeight;
-        }
-
-        chatbotSend.addEventListener('click', () => {
-            const message = chatbotInput.value.trim();
-            if (message) {
-                addUserMessage(message);
-                chatbotInput.value = '';
-                
-                // Show typing indicator
-                const typingIndicator = document.createElement('div');
-                typingIndicator.classList.add('chatbot-message', 'bot-message');
-                typingIndicator.innerHTML = '<i class="fas fa-ellipsis-h"></i>';
-                chatbotBody.appendChild(typingIndicator);
-                chatbotBody.scrollTop = chatbotBody.scrollHeight;
-                
-                // Simulate bot thinking and response
-                setTimeout(() => {
-                    chatbotBody.removeChild(typingIndicator);
-                    const randomResponse = healthResponses[Math.floor(Math.random() * healthResponses.length)];
-                    addBotMessage(randomResponse);
-                }, 1500);
+        // JS Code
+        const chatBody = document.querySelector('.chat-body');
+        const messageInput = document.querySelector('.message-input');
+        const sendMessageButton = document.querySelector('#send-message');
+        const fileInput = document.querySelector('#file-input');
+        const fileUploadWrapper = document.querySelector('.file-upload-wrapper');
+        const fileCancelButton = document.querySelector('#file-cancel');
+        const chatbotToggler = document.querySelector('#chatbot-toggler');
+        const closeChatbot = document.querySelector('#close-chatbot');
+        // API URL and API key
+        const API_KEY = 'AIzaSyAOrSIhM8Lr3mGfB93JONOImSOBVIkZmFk';
+        const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
+        const userData = {
+            message: null,
+            file: {
+                data: null,
+                mime_type: null,
             }
-        });
-
-        chatbotInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                chatbotSend.click();
-            }
-        });
-
-        // Emergency Button
-        const emergencyBtn = document.getElementById('emergency-btn');
-        
-        emergencyBtn.addEventListener('click', () => {
-            if (confirm('Are you in an emergency situation? This will alert your emergency contacts with your location.')) {
-                alert('Emergency alert sent! Help is on the way.');
-                // In a real app, this would send location and health data to emergency contacts
-            }
-        });
-
-        // AR Demo Modal
-        const arDemoBtn = document.getElementById('ar-demo-btn');
-        const arModal = document.getElementById('ar-modal');
-        const arModalClose = document.getElementById('ar-modal-close');
-        
-        arDemoBtn.addEventListener('click', () => {
-            arModal.classList.add('active');
-        });
-        
-        arModalClose.addEventListener('click', () => {
-            arModal.classList.remove('active');
-        });
-
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
+        };
+        const chatHistory = [];
+        const initialInputHeight = messageInput.scrollHeight;
+        // Create message element
+        const createMessageElement = (content, ...classes) => {
+            const div = document.createElement('div');
+            div.classList.add('message', ...classes);
+            div.innerHTML = content;
+            return div;
+        };
+        // Generate bot response
+        const generateBotResponse = async (incomingMessageDiv) => {
+            const messageElement = incomingMessageDiv.querySelector('.message-text');
+            chatHistory.push({
+                role: 'user',
+                parts: [{ text: userData.message }, ...(userData.file.data ? [{ inline_data: userData.file }] : [])]
+            });
+            const requestOptions = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    contents: chatHistory
+                }),
+            };
+            try {
+                const response = await fetch(API_URL, requestOptions);
+                const data = await response.json();
+                if (!response.ok) throw new Error(data.error.message);
+                const apiResponseText = data.candidates[0].content.parts[0].text
+                    .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+                    .replace(/\*(.*?)\*/g, "<em>$1</em>")
+                    .replace(/__(.*?)__/g, "<strong>$1</strong>")
+                    .replace(/_(.*?)_/g, "<em>$1</em>")
+                    .replace(/~~(.*?)~~/g, "<del>$1</del>")
+                    .replace(/```([\s\S]*?)```/g, `<pre><code>$1</code></pre>`)
+                    .replace(/`([^`]+)`/g, "<code>$1</code>")
+                    .replace(/^> (.*$)/gm, "<blockquote>$1</blockquote>")
+                    .replace(/\[(.*?)\]\((.*?)\)/g, "<a href='$2' target='_blank'>$1</a>")
+                    .replace(/!\[(.*?)\]\((.*?)\)/g, "<img src='$2' alt='$1' style='max-width: 100%;'>")
+                    .replace(/^### (.*$)/gm, "<h3>$1</h3>")
+                    .replace(/^## (.*$)/gm, "<h2>$1</h2>")
+                    .replace(/^# (.*$)/gm, "<h1>$1</h1>")
+                    .replace(/^\* (.*$)/gm, "<ul><li>$1</li></ul>")
+                    .replace(/^\d+\. (.*$)/gm, "<ol><li>$1</li></ol>")
+                    .replace(/\n/g, "<br>")
+                    .trim();
+                const fixedResponse = apiResponseText
+                    .replace(/<\/ul>\s*<ul>/g, "")
+                    .replace(/<\/ol>\s*<ol>/g, "");
+                messageElement.innerHTML = fixedResponse;
+                chatHistory.push({
+                    role: 'model',
+                    parts: [{ text: apiResponseText }]
                 });
-                
-                // Close mobile menu if open
-                navLinks.classList.remove('active');
-                ctaButtons.classList.remove('active');
-            });
+            } catch (error) {
+                messageElement.innerText = error.message;
+                messageElement.style.color = 'red';
+            } finally {
+                userData.file = {};
+                incomingMessageDiv.classList.remove('thinking');
+                chatBody.scrollTo({ top: chatBody.scrollHeight, behavior: 'smooth' });
+            }
+        };
+        // Handle outgoing message
+        const handleOutgoingMessage = (e) => {
+            e.preventDefault();
+            userData.message = messageInput.value.trim();
+            messageInput.value = '';
+            fileUploadWrapper.classList.remove('file-uploaded');
+            messageInput.dispatchEvent(new Event('input'));
+            const messageContent = `<div class="message-text">${userData.message}</div> ${userData.file.data ? `<img src="data:${userData.file.mime_type};base64,${userData.file.data}" alt="file" class="attachment">` : ''}`;
+            const outgoingMessageDiv = createMessageElement(messageContent, 'user-message');
+            chatBody.appendChild(outgoingMessageDiv);
+            chatBody.scrollTo({ top: chatBody.scrollHeight, behavior: 'smooth' });
+            setTimeout(() => {
+                const messageContent = `<svg class="bot-avatar" xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 1024 1024">
+                    <path d="M738.3 287.6H285.7c-59 0-106.8 47.8-106.8 106.8v303.1c0 59 47.8 106.8 106.8 106.8h81.5v111.1c0 .7.8 1.1 1.4 .7l166.9-110.6 41.8-.8h117.4l43.6-.4c59 0 106.8-47.8 106.8-106.8V394.5c0-59-47.8-106.9-106.8-106.9zM351.7 448.2c0-29.5 23.9-53.5 53.5-53.5s53.5 23.9 53.5 53.5-23.9 53.5-53.5 53.5-53.5-23.9-53.5-53.5zm157.9 267.1c-67.8 0-123.8-47.5-132.3-109h264.6c-8.6 61.5-64.5 109-132.3 109zm110-213.7c-29.5 0-53.5-23.9-53.5-53.5s23.9-53.5 53.5-53.5 53.5 23.9 53.5 53.5-23.9 53.5-53.5 53.5zM867.2 644.5V453.1h26.5c19.4 0 35.1 15.7 35.1 35.1v121.1c0 19.4-15.7 35.1-35.1 35.1h-26.5zM95.2 609.4V488.2c0-19.4 15.7-35.1 35.1-35.1h26.5v191.3h-26.5c-19.4 0-35.1-15.7-35.1-35.1zM561.5 149.6c0 23.4-15.6 43.3-36.9 49.7v44.9h-30v-44.9c-21.4-6.5-36.9-26.3-36.9-49.7 0-28.6 23.3-51.9 51.9-51.9s51.9 23.3 51.9 51.9z"></path>
+                </svg>
+                <div class="message-text">
+                    <div class="thinking-indicator">
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                    </div>
+                </div>`;
+                const incomingMessageDiv = createMessageElement(messageContent, 'bot-message', 'thinking');
+                chatBody.appendChild(incomingMessageDiv);
+                chatBody.scrollTo({ top: chatBody.scrollHeight, behavior: 'smooth' });
+                generateBotResponse(incomingMessageDiv);
+            }, 600);
+        };
+        messageInput.addEventListener('keydown', (e) => {
+            const userMessage = e.target.value.trim();
+            if (e.key === 'Enter' && userMessage && !e.shiftKey && window.innerWidth > 768) {
+                handleOutgoingMessage(e);
+            }
         });
-
-        // Pricing tabs
-        const pricingTabs = document.querySelectorAll('.pricing-tab');
-        
-        pricingTabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                pricingTabs.forEach(t => t.classList.remove('active'));
-                tab.classList.add('active');
-            });
+        messageInput.addEventListener('input', () => {
+            messageInput.style.height = `${initialInputHeight}px`;
+            messageInput.style.height = `${messageInput.scrollHeight}px`;
+            document.querySelector('.chat-form').style.borderRadius = messageInput.scrollHeight > initialInputHeight ? '15px' : '32px';
         });
-
-        // Animation on scroll
-        const fadeElements = document.querySelectorAll('.fade-in');
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = 1;
-                    entry.target.style.transform = 'translateY(0)';
+        fileInput.addEventListener('change', () => {
+            const file = fileInput.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                fileUploadWrapper.querySelector('img').src = e.target.result;
+                fileUploadWrapper.classList.add('file-uploaded');
+                const base64String = e.target.result.split(',')[1];
+                userData.file = {
+                    data: base64String,
+                    mime_type: file.type,
+                };
+                fileInput.value = '';
+            };
+            reader.readAsDataURL(file);
+        });
+        fileCancelButton.addEventListener('click', () => {
+            userData.file = {};
+            fileUploadWrapper.classList.remove('file-uploaded');
+        });
+        const picker = new EmojiMart.Picker({
+            theme: 'light',
+            skinTonePosition: 'none',
+            previewPosition: 'none',
+            onEmojiSelect: (emoji) => {
+                const { selectionStart: start, selectionEnd: end } = messageInput;
+                messageInput.setRangeText(emoji.native, start, end, 'end');
+                messageInput.focus();
+            },
+            onClickOutside: (e) => {
+                if (e.target.id === 'emoji-picker') {
+                    document.body.classList.toggle('show-emoji-picker');
+                } else {
+                    document.body.classList.remove('show-emoji-picker');
+                }
+            }
+        });
+        document.querySelector('.chat-form').appendChild(picker);
+        sendMessageButton.addEventListener('click', (e) => handleOutgoingMessage(e));
+        document.querySelector('#file-upload').addEventListener('click', () => fileInput.click());
+        chatbotToggler.addEventListener('click', () => document.body.classList.toggle('show-chatbot'));
+        closeChatbot.addEventListener('click', () => document.body.classList.remove('show-chatbot'));
+        // Custom API call for other features
+        async function callAI(prompt, file = null) {
+            const parts = [{ text: prompt }];
+            if (file) {
+                parts.push({ inline_data: file });
+            }
+            const contents = [{ role: 'user', parts }];
+            const res = await fetch(API_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ contents })
+            });
+            const data = await res.json();
+            if (!res.ok) throw new Error(data.error.message);
+            return data.candidates[0].content.parts[0].text;
+        }
+        // Local Storage for offline
+        let healthData = JSON.parse(localStorage.getItem('healthData')) || [];
+        let points = parseInt(localStorage.getItem('points')) || 0;
+        let completedChallenges = JSON.parse(localStorage.getItem('completedChallenges')) || {};
+        document.getElementById('points').textContent = `Points: ${points}`;
+        // Dynamic UI (Day/Night)
+        const hour = new Date().getHours();
+        if (hour >= 18 || hour < 6) {
+            document.body.classList.add('dark');
+        }
+        // Dashboard: Log Data
+        document.getElementById('logData').addEventListener('click', () => {
+            const heart = document.getElementById('heartRate').value;
+            const sleep = document.getElementById('sleepHours').value;
+            const steps = document.getElementById('steps').value;
+            if (heart && sleep && steps) {
+                healthData.push({ heart, sleep, steps });
+                localStorage.setItem('healthData', JSON.stringify(healthData));
+                updateChart();
+                updateAvatar();
+                alert('Data logged!');
+            }
+        });
+        // Get Insights
+        document.getElementById('getInsights').addEventListener('click', async () => {
+            if (healthData.length === 0) return alert('Log some data first!');
+            const latest = healthData[healthData.length - 1];
+            const prompt = `Analyze health data: heart rate ${latest.heart}, sleep ${latest.sleep} hours, steps ${latest.steps}. Provide insights and suggestions.`;
+            try {
+                const response = await callAI(prompt);
+                document.getElementById('insights').innerHTML = response;
+            } catch (error) {
+                document.getElementById('insights').innerHTML = 'Error: ' + error.message;
+            }
+        });
+        // Predict Health
+        document.getElementById('predictHealth').addEventListener('click', async () => {
+            if (healthData.length < 3) return alert('Need more data for prediction!');
+            const hearts = healthData.map(d => d.heart).join(', ');
+            const sleeps = healthData.map(d => d.sleep).join(', ');
+            const prompt = `Predict potential health issues based on trends: heart rates [${hearts}], sleep hours [${sleeps}]. Give early warnings.`;
+            try {
+                const response = await callAI(prompt);
+                document.getElementById('predictions').innerHTML = response;
+            } catch (error) {
+                document.getElementById('predictions').innerHTML = 'Error: ' + error.message;
+            }
+        });
+        // Animated Chart
+        function updateChart() {
+            const ctx = document.getElementById('chart').getContext('2d');
+            ctx.clearRect(0, 0, 400, 200);
+            if (healthData.length > 0) {
+                const latest = healthData[healthData.length - 1];
+                let height = 0;
+                function animate() {
+                    if (height < latest.heart) {
+                        height += 1;
+                        ctx.fillStyle = '#5350c4';
+                        ctx.fillRect(50, 200 - height, 50, height);
+                        requestAnimationFrame(animate);
+                    }
+                }
+                animate();
+                ctx.fillText('Heart Rate', 50, 190);
+                height = 0;
+                function animateSleep() {
+                    if (height < latest.sleep * 20) {
+                        height += 1;
+                        ctx.fillRect(150, 200 - height, 50, height);
+                        requestAnimationFrame(animateSleep);
+                    }
+                }
+                animateSleep();
+                ctx.fillText('Sleep', 150, 190);
+            }
+        }
+        // Avatar Update
+        function updateAvatar() {
+            const avatar = document.getElementById('healthAvatar');
+            if (healthData.length > 0) {
+                const latest = healthData[healthData.length - 1];
+                if (latest.heart > 80 || latest.sleep < 7) {
+                    avatar.textContent = '😟';
+                } else {
+                    avatar.textContent = '😊';
+                }
+            }
+        }
+        // Generate Report (simple print)
+        document.getElementById('generateReport').addEventListener('click', () => {
+            window.print();
+        });
+        // AR Fitness
+        const arCanvas = document.getElementById('arCanvas');
+        const arCtx = arCanvas.getContext('2d');
+        let video = document.createElement('video');
+        video.autoplay = true;
+        let arMode = '';
+        async function startAR() {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                video.srcObject = stream;
+                arCanvas.style.display = 'block';
+                drawAR();
+            } catch (err) {
+                alert('Camera access denied');
+            }
+        }
+        function drawAR() {
+            if (video.videoWidth > 0) {
+                arCtx.drawImage(video, 0, 0, 640, 480);
+                arCtx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+                arCtx.font = '30px Arial';
+                if (arMode === 'fitness') {
+                    arCtx.fillText('Raise your arms! Virtual trainer here.', 100, 100);
+                } else if (arMode === 'meditation') {
+                    arCtx.fillText('Breathe deeply. Imagine nature around you.', 100, 100);
+                    document.getElementById('meditationMusic').play();
+                }
+            }
+            requestAnimationFrame(drawAR);
+        }
+        document.getElementById('startARFitness').addEventListener('click', () => {
+            arMode = 'fitness';
+            startAR();
+        });
+        document.getElementById('startARMeditation').addEventListener('click', () => {
+            arMode = 'meditation';
+            startAR();
+        });
+        // Smart Nutrition
+        document.getElementById('analyzeFood').addEventListener('click', () => {
+            const file = document.getElementById('foodImage').files[0];
+            if (!file) return alert('Upload an image');
+            const reader = new FileReader();
+            reader.onload = async (e) => {
+                const base64 = e.target.result.split(',')[1];
+                const fileData = { data: base64, mime_type: file.type };
+                const prompt = 'Analyze this food plate: identify type, estimate calories, suggest healthy alternatives.';
+                try {
+                    const response = await callAI(prompt, fileData);
+                    document.getElementById('nutritionInfo').innerHTML = response;
+                } catch (error) {
+                    document.getElementById('nutritionInfo').innerHTML = 'Error: ' + error.message;
+                }
+            };
+            reader.readAsDataURL(file);
+        });
+        document.getElementById('generateMealPlan').addEventListener('click', async () => {
+            const weight = document.getElementById('weight').value;
+            const goal = document.getElementById('goal').value;
+            const prompt = `Generate a daily meal plan for ${goal} weight, current weight ${weight}kg.`;
+            try {
+                const response = await callAI(prompt);
+                document.getElementById('mealPlan').innerHTML = response;
+            } catch (error) {
+                document.getElementById('mealPlan').innerHTML = 'Error: ' + error.message;
+            }
+        });
+        // Mental Health
+        document.getElementById('moodForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const happy = document.getElementById('happy').value;
+            const stress = document.getElementById('stress').value;
+            const energy = document.getElementById('energy').value;
+            const prompt = `Analyze mood: happiness ${happy}/10, stress ${stress}/10, energy ${energy}/10. Detect signs of depression or stress and suggest exercises or specialist chat.`;
+            try {
+                const response = await callAI(prompt);
+                document.getElementById('mentalInsights').innerHTML = response;
+            } catch (error) {
+                document.getElementById('mentalInsights').innerHTML = 'Error: ' + error.message;
+            }
+        });
+        // Community
+        const postsDiv = document.getElementById('posts');
+        let posts = JSON.parse(localStorage.getItem('posts')) || [];
+        posts.forEach(post => {
+            const p = document.createElement('p');
+            p.textContent = post;
+            postsDiv.appendChild(p);
+        });
+        document.getElementById('postButton').addEventListener('click', () => {
+            const text = document.getElementById('postText').value;
+            if (text) {
+                posts.push(text);
+                localStorage.setItem('posts', JSON.stringify(posts));
+                const p = document.createElement('p');
+                p.textContent = text;
+                postsDiv.appendChild(p);
+            }
+        });
+        // AI Vision
+        document.getElementById('analyzeVision').addEventListener('click', () => {
+            const file = document.getElementById('visionImage').files[0];
+            if (!file) return alert('Upload an image');
+            const reader = new FileReader();
+            reader.onload = async (e) => {
+                const base64 = e.target.result.split(',')[1];
+                const fileData = { data: base64, mime_type: file.type };
+                const prompt = 'Analyze this skin wound or spot for medical issues, like skin cancer detection. Suggest if needs doctor attention.';
+                try {
+                    const response = await callAI(prompt, fileData);
+                    document.getElementById('visionInfo').innerHTML = response;
+                } catch (error) {
+                    document.getElementById('visionInfo').innerHTML = 'Error: ' + error.message;
+                }
+            };
+            reader.readAsDataURL(file);
+        });
+        // Gamification
+        document.querySelectorAll('.completeChallenge').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const challenge = btn.dataset.challenge;
+                if (!completedChallenges[challenge]) {
+                    completedChallenges[challenge] = true;
+                    points += 10;
+                    localStorage.setItem('completedChallenges', JSON.stringify(completedChallenges));
+                    localStorage.setItem('points', points);
+                    document.getElementById('points').textContent = `Points: ${points}`;
+                    document.getElementById('progressPath').style.width = `${(points / 100) * 100}%`; // Assume 100 for next level
+                    btn.disabled = true;
+                    updateAvatar(); // Improve avatar if points increase
                 }
             });
-        }, { threshold: 0.1 });
-        
-        fadeElements.forEach(element => {
-            element.style.opacity = 0;
-            element.style.transform = 'translateY(20px)';
-            element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(element);
         });
-
-        // Health Avatar Animation
-        function updateHealthAvatar() {
-            const healthAvatar = document.createElement('div');
-            healthAvatar.className = 'health-avatar';
-            healthAvatar.innerHTML = '<i class="fas fa-heartbeat"></i>';
-            
-            // Random health status (for demo)
-            const healthStatus = Math.random();
-            if (healthStatus > 0.7) {
-                healthAvatar.style.backgroundColor = '#4caf50'; // Good health
-                healthAvatar.innerHTML = '<i class="fas fa-smile"></i>';
-            } else if (healthStatus > 0.3) {
-                healthAvatar.style.backgroundColor = '#ff9800'; // Average health
-                healthAvatar.innerHTML = '<i class="fas fa-meh"></i>';
-            } else {
-                healthAvatar.style.backgroundColor = '#f44336'; // Poor health
-                healthAvatar.innerHTML = '<i class="fas fa-frown"></i>';
+        // Emergency
+        document.getElementById('emergencyButton').addEventListener('click', () => {
+            navigator.geolocation.getCurrentPosition(pos => {
+                const lat = pos.coords.latitude;
+                const lon = pos.coords.longitude;
+                const latestData = healthData[healthData.length - 1] || {};
+                const message = `Emergency! Location: ${lat}, ${lon}. Vital signs: Heart ${latestData.heart || 'N/A'}, Pressure N/A, etc. Sending to family/ambulance.`;
+                alert(message); // Placeholder for send
+                if ('share' in navigator) {
+                    navigator.share({ title: 'Emergency', text: message });
+                }
+            }, err => {
+                alert('Location access denied. Emergency data: ' + JSON.stringify(healthData[healthData.length - 1]));
+            });
+        });
+        // Medication Reminder
+        document.getElementById('setReminder').addEventListener('click', () => {
+            const med = document.getElementById('medication').value;
+            if (med) {
+                alert(`Reminder set for ${med}. Nearest pharmacy: Placeholder.`);
+                // Simulate reminder after 10s
+                setTimeout(() => alert(`Time for ${med}!`), 10000);
             }
-            
-            // Add to chatbot (demo purposes)
-            const existingAvatar = document.querySelector('.health-avatar');
-            if (existingAvatar) {
-                existingAvatar.replaceWith(healthAvatar);
-            } else {
-                chatbotBody.insertBefore(healthAvatar, chatbotBody.firstChild);
-            }
-        }
-
-        // Initialize health avatar
-        updateHealthAvatar();
-        
-        // Update avatar periodically (demo)
-        setInterval(updateHealthAvatar, 10000);
+        });
+        // Initial updates
+        updateChart();
+        updateAvatar();
     </script>
 </body>
 </html>
